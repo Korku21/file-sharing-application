@@ -5,6 +5,11 @@
     --dark-bold-color:#fff; /* just white text */
 }
 
+@font-face {
+    font-family: 'Poppins';
+    src: url('../fonts/Poppins-Regular.ttf');
+}
+
 *{
     box-sizing: border-box;
     margin:0;
@@ -17,11 +22,12 @@ body{
     font-family:'Poppins',sans-serif;
     font-weight:300; 
     font-style:normal;
+    min-height:100vh; /* because of some stupid tailwind cdn behaviour */
 }
 
 @media(prefers-color-scheme:dark){
     body{
-        background:var(--dark-body-background);
+        background:var(--dark-body-background) !important;
     }
 }
 
@@ -71,28 +77,75 @@ ul{
     gap:1rem;
 }
 
-li{
+.file{
     list-style:none;
     padding:0.75rem;
     width:110px;
+    position:relative;
 }
 
-li .filename{
+.file .filename{
     font-size:15px;
 }
 
-li:hover{
+.file:hover{
     cursor:pointer;
 }
 
+.file .dots{
+    position: absolute;
+    right:0.25rem;
+    top:0.25rem;
+    padding:0.125rem;
+}
+
+
+.file:hover .dots svg{
+    opacity:1;
+}
+.file .dots svg{
+    opacity:0;
+}
+
+
+.dropdown-content{
+    position:absolute; 
+    top:2.5rem;
+    padding:0.75rem;
+    z-index:99;
+}
+
 @media(prefers-color-scheme:dark){
-    li{
+    .file{
         color:var(--dark-bold-color);
     }
-
-    li:hover{
+    
+    .file:hover{
         background-color:var(--dark-primary);
         box-shadow: 0 0 10px rgba(106, 90, 205, 0.2) !important;
     }
+
+    .dropdown-content{
+        background:var(--dark-primary);
+        color:var(--dark-text);
+        box-shadow: 0 0 5px rgba(106, 90, 205, 0.2);
+    }
+
+    .file .dots:hover{
+        background: rgb(128, 128, 128, 0.1);
+    }
+    
 }
 
+
+/* upload file page*/
+@media(prefers-color-scheme:dark){
+    .file-upload{
+        background:var(--dark-primary);
+    }
+
+    .input{
+        background:var(--dark-primary);
+    }
+
+}
